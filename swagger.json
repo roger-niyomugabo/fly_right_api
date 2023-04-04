@@ -1,8 +1,8 @@
 {
-    "openapi": "3.0.3",
+    "openapi": "3.0.0",
     "info": {
       "version": "1.0.0",
-      "description": "",
+      "description": "FlyRight is an airline complaint system which provides customers with a simple and efficient way to report any issues they may encounter during their travel.",
       "title": "Fly Right"
     },
     "servers": [
@@ -10,5 +10,288 @@
             "url": "http://localhost:3000/",
             "description": "Local server"
         }
-    ]
+    ],
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+                "description": "To authenticate, include a valid JWT token in the Authorization header using the Bearer scheme. Contact the API administrator to obtain a token."
+            }
+        },
+        "responses": {
+            "NotFound": {
+                "description": "The specified resource was not found",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Resource not found"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "BadRequest": {
+                "description": "Bad Request",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Bad Request"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "UnauthorizedError": {
+                "description": "Unauthorized",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Access token is missing or invalid"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Forbidden": {
+                "description": "Forbidden",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Forbidden"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "ConflictError": {
+                "description": "Resource exists",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Resource exists"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "ValidationError": {
+                "description": "Validation error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Validation error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "ServerError": {
+                "description": "Internal server error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Internal server error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "schemas": {
+            "AdminSignup": {
+                "required": [
+                    "firstName",
+                    "lastName",
+                    "email",
+                    "password",
+                    "securityQuestion",
+                    "securityAnswer"
+                ],
+                "type": "object",
+                "properties": {
+                    "firstName": {
+                        "type": "string",
+                        "description": "your first name",
+                        "example": "Roger"
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "description": "your last name",
+                        "example": "NIYOMUGABO"
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "your email",
+                        "example": "flyright.manager@gmail.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "description": "your password",
+                        "example": "Niyomugabo3"
+                    },
+                    "securityQuestion": {
+                        "type": "string",
+                        "description": "Security question",
+                        "example": "what is your favorite color?"
+                    },
+                    "securityAnswer": {
+                        "type": "string",
+                        "description": "Security answer",
+                        "example": "white"
+                    }
+                }
+            },
+            "Login": {
+                "required": [
+                    "email",
+                    "password"
+                ],
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "description": "your email",
+                        "example": "flyright.manager@gmail.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "description": "your password",
+                        "example": "Niyomugabo3"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "admin",
+            "description": "Admin Endpoints"
+        },
+        {
+            "name": "employee",
+            "description": "Employee Endpoints"
+        },
+        {
+            "name": "claim",
+            "description": "claim Endpoints"
+        }
+    ],
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "security": [
+        {
+            "bearerAuth": []
+        }
+    ],
+    "paths": {
+        "/api/admin/signup": {
+            "post": {
+                "tags": [
+                    "admin"
+                ],
+                "summary": "Admin signup",
+                "description": "Admin can create an account",
+                "requestBody": {
+                    "required": "true",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Signup"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201" : {
+                        "description": "Signed up successfully"
+                    },
+                    "409" : {
+                        "$ref": "#/components/responses/ConflictError"
+                    },
+                    "422" : {
+                        "$ref": "#/components/responses/ValidationError"
+                    },
+                    "500" : {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                }
+            }
+        },
+        
+        "/api/admin/login": {
+            "post": {
+                "tags": [
+                    "admin"
+                ],
+                "summary": "Admin login",
+                "description": "Admin can login into his account using email and password",
+                "requestBody": {
+                    "required": "true",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Login"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200" : {
+                        "description": "Logged in successfully"
+                    },
+                    "400" : {
+                        "$ref": "#/components/responses/BadRequest"
+                    },
+                    "404" : {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "422" : {
+                        "$ref": "#/components/responses/ValidationError"
+                    },
+                    "500" : {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                }
+            }
+        }
+    }
 }
