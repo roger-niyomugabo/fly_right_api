@@ -36,7 +36,7 @@ class AdminController {
       const adminExist = await AdminService.findAdmin({ email });
       if (!adminExist) return output(res, 404, 'Email not registered', null, 'NOT_FOUND');
       const isMatch = await check(adminExist.password, password);
-      if (!isMatch) return output(res, 404, 'Wrong password', null, 'NOT_FOUND');
+      if (!isMatch) return output(res, 400, 'Wrong password', null, 'NOT_FOUND');
       const token = await sign({ _id: adminExist._id, role: 'admin' }, { expiresIn: '72h' });
       return output(res, 200, 'You loged in successfully', { adminExist, token });
     } catch (error) {
