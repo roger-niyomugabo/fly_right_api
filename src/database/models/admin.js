@@ -18,7 +18,11 @@ const adminSchema = mongoose.Schema({
   },
   securityAnswer: {
     type: String,
-  }
+  },
+  role: {
+    type: String,
+    default: 'admin',
+  },
 });
 const Admin = mongoose.model('Admin', adminSchema);
 
