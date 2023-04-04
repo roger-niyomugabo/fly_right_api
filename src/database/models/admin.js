@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
 
 const adminSchema = mongoose.Schema({
-  organization: {
+  firstName: {
     type: String,
   },
-  fullName: {
+  lastName: {
     type: String,
   },
   email: {
@@ -12,8 +12,13 @@ const adminSchema = mongoose.Schema({
   },
   password: {
     type: String,
-    minlength: [6, 'password must have 6 character']
   },
+  securityQuestion: {
+    type: String,
+  },
+  securityAnswer: {
+    type: String,
+  }
 });
 const Admin = mongoose.model('Admin', adminSchema);
 
