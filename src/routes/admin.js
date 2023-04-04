@@ -1,9 +1,10 @@
 import { Router } from 'express';
 import AdminController from '../controllers/adminController';
-import adminSignupValidation from '../middlewares/validation/admin';
+import * as Validation from '../middlewares/validation/admin';
 
 const router = Router();
 
-router.post('/signup', adminSignupValidation, AdminController.createAdmin);
+router.post('/signup', Validation.adminSignupValidation, AdminController.adminSignup);
+router.post('/login', Validation.adminLoginValidation, AdminController.adminLogin);
 
 export default router;
