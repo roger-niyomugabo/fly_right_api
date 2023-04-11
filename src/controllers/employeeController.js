@@ -1,8 +1,9 @@
-import { generate } from '../helpers/bcrypt';
+import { generate, check } from '../helpers/bcrypt';
 import output from '../helpers/response';
 import EmployeeService from '../database/services/employeeServices';
 import generatePassword from '../helpers/generatePassword';
 import mailer from '../helpers/mailer';
+import { sign } from '../helpers/jwt';
 
 class EmployeeController {
   static async employeeSignup(req, res) {
@@ -24,6 +25,20 @@ class EmployeeController {
         email: employee.email, password, fullName: employee.fullName, jobTitle: employee.jobTitle
       }, 'createEmployee');
       return output(res, 201, 'Signed up successfully', { employee });
+    } catch (error) {
+      return output(res, 500, error.message || error, null, 'SERVER_ERROR');
+    }
+  }
+
+  static async employeeLogin(req, res) {
+    try {
+      const { email, password } = req.body;
+      const employee = await EmployeeService.findEmployee({ email });
+      if (!employee) return output(res, 404, 'Email not registered', null, 'NOT_FOUND');
+      const isMatch = check(employee.password, password);
+      if (!isMatch) return output(res, 400, 'Email or password incorrect', null, 'BAD_REQUEST');
+      const token = sign({ _id: employee._id, role: employee.role }, { expiresIn: '72h' });
+      return output(res, 200, 'Logged in successfully', { token });
     } catch (error) {
       return output(res, 500, error.message || error, null, 'SERVER_ERROR');
     }
