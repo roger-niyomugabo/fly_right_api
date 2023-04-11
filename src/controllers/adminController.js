@@ -11,6 +11,7 @@ class AdminController {
         lastName, email, password, securityQuestion,
         securityAnswer
       } = req.body;
+      const role = 'admin';
       const adminExist = await AdminService.findAdmin({ email });
       if (adminExist) return output(res, 409, 'Admin already exists', null, 'ADMIN_EXISTS');
       const hashedPassword = await generate(password);
@@ -20,7 +21,8 @@ class AdminController {
         email,
         password: hashedPassword,
         securityQuestion,
-        securityAnswer
+        securityAnswer,
+        role
       });
       admin.password = undefined;
       const token = await sign({ _id: admin._id, role: 'admin' }, { expiresIn: '72h' });

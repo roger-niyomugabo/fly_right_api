@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer';
 import config from './config';
+import { employeeSignupTemplate } from './emailTemplates';
 
 const mailer = async (info, action) => {
   const transporter = nodemailer.createTransport({
@@ -14,9 +15,9 @@ const mailer = async (info, action) => {
   let emailto;
   let data;
   switch (action) {
-    case 'createUser':
-      subject = 'Signup Successful';
-      data = (info);
+    case 'createEmployee':
+      subject = 'Sign up successful';
+      data = employeeSignupTemplate(info);
       emailto = info.email;
       break;
     default:
