@@ -43,5 +43,14 @@ class EmployeeController {
       return output(res, 500, error.message || error, null, 'SERVER_ERROR');
     }
   }
+
+  static async getAllEmployees(req, res) {
+    try {
+      const employees = await EmployeeService.getEmployees();
+      return output(res, 200, 'All employees retrieved!', employees);
+    } catch (error) {
+      return output(res, 500, error.message || error, null, 'SERVER_ERROR');
+    }
+  }
 }
 export default EmployeeController;

@@ -8,5 +8,5 @@ const router = Router();
 
 router.post('/signup', isAdmin, Validation.employeeSignupValidation, EmployeeController.employeeSignup);
 router.post('/login', loginValidation, EmployeeController.employeeLogin);
-
+router.get('/getAll', isAdmin, EmployeeController.getAllEmployees);
 export default router;
