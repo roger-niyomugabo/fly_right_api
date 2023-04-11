@@ -196,6 +196,43 @@
                         "example": "Niyomugabo3"
                     }
                 }
+            },
+            "EmployeeSignup": {
+                "required": [
+                    "fullName",
+                    "email",
+                    "phoneNumber",
+                    "jobTitle",
+                    "address"
+                ],
+                "type": "object",
+                "properties": {
+                    "fullName": {
+                        "type": "string",
+                        "description": "full name",
+                        "example": "Roger NIYOMUGABO"
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "email",
+                        "example": "rogerniyomugabo5@gmail.com"
+                    },
+                    "phoneNumber": {
+                        "type": "string",
+                        "description": "phone number",
+                        "example": "250782811462"
+                    },
+                    "jobTitle": {
+                        "type": "string",
+                        "description": "job title",
+                        "example": "Customer Service Provider"
+                    },
+                    "address": {
+                        "type": "string",
+                        "description": "address",
+                        "example": "Kigali, Gasabo"
+                    }
+                }
             }
         }
     },
@@ -264,6 +301,83 @@
                 ],
                 "summary": "Admin login",
                 "description": "Admin can login into his account using email and password",
+                "requestBody": {
+                    "required": "true",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Login"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200" : {
+                        "description": "Logged in successfully"
+                    },
+                    "400" : {
+                        "$ref": "#/components/responses/BadRequest"
+                    },
+                    "404" : {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "422" : {
+                        "$ref": "#/components/responses/ValidationError"
+                    },
+                    "500" : {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                }
+            }
+        },
+
+        "/api/employee/signup": {
+            "post": {
+                "tags": [
+                    "employee"
+                ],
+                "summary": "",
+                "description": "",
+                "requestBody": {
+                    "required": "true",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EmployeeSignup"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201" : {
+                        "description": "Signed up successfully"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/UnauthorizedError"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/Forbidden"
+                    },
+                    "409" : {
+                        "$ref": "#/components/responses/ConflictError"
+                    },
+                    "422" : {
+                        "$ref": "#/components/responses/ValidationError"
+                    },
+                    "500" : {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                }
+            }
+        },
+
+        "/api/employee/login": {
+            "post": {
+                "tags": [
+                    "employee"
+                ],
+                "summary": "Employee login",
+                "description": "Employee can login into his account using email and password",
                 "requestBody": {
                     "required": "true",
                     "content": {

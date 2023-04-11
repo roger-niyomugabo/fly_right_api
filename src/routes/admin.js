@@ -5,6 +5,6 @@ import * as Validation from '../middlewares/validation/admin';
 const router = Router();
 
 router.post('/signup', Validation.adminSignupValidation, AdminController.adminSignup);
-router.post('/login', Validation.adminLoginValidation, AdminController.adminLogin);
+router.post('/login', Validation.loginValidation, AdminController.adminLogin);
 
 export default router;
