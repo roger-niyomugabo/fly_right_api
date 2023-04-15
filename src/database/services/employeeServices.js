@@ -16,6 +16,14 @@ class EmployeeServices {
       throw error;
     }
   }
+
+  static async deleteEmployee(employee) {
+    try{
+      return await Employee.findByIdAndDelete(employee);
+    } catch(error) {
+      throw error;
+    }
+  }
 }
 
 export default EmployeeServices;
