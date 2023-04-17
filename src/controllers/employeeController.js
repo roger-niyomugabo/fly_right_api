@@ -52,5 +52,16 @@ class EmployeeController {
       return output(res, 500, error.message || error, null, 'SERVER_ERROR');
     }
   }
+
+  static async getEmployee(req, res) {
+    try {
+      const id = req.params._id;
+      const employee = await EmployeeService.getEmployee(id);
+      if (!employee) return output(res, 404, 'employee not found');
+      return output(res, 200, ' employee retrieved!', employee);
+    } catch (error) {
+      return output(res, 500, error.message || error, null, 'SERVER_ERROR');
+    }
+  }
 }
 export default EmployeeController;
