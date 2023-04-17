@@ -24,6 +24,14 @@ class EmployeeServices {
       throw error;
     }
   }
+
+  static async getEmployee(id) {
+    try {
+      return await Employee.findById(id).select('_id fullName email phoneNumber jobTitle');
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default EmployeeServices;
