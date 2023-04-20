@@ -32,6 +32,14 @@ class EmployeeServices {
       throw error;
     }
   }
+
+  static async getEmployee(id) {
+    try {
+      return await Employee.findById(id).select('-role');
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default EmployeeServices;
