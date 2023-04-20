@@ -9,6 +9,10 @@
         {
             "url": "http://localhost:3000/",
             "description": "Local server"
+        },
+        {
+            "url": "https://flyrightapi.azurewebsites.net/",
+            "description": "Deployed server"
         }
     ],
     "components": {
