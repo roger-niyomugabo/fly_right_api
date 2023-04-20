@@ -1,0 +1,3 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/609cd830-985c-4100-ace8-79053aad19ab/resourceGroups/FlyRightAPIServices/providers/Microsoft.Web/sites/FlyRightAPI"
+}
