@@ -19,7 +19,7 @@ class EmployeeServices {
 
   static async getEmployees() {
     try {
-      return await Employee.find().select('-_id fullName email phoneNumber jobTitle').sort({ createdAt: -1 });
+      return await Employee.find().select('_id fullName email phoneNumber jobTitle').sort({ createdAt: -1 });
     } catch (error) {
       throw error;
     }
