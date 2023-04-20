@@ -16,6 +16,22 @@ class EmployeeServices {
       throw error;
     }
   }
+
+  static async getEmployees() {
+    try {
+      return await Employee.find().select('-_id fullName email phoneNumber jobTitle').sort({ createdAt: -1 });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async getEmployee(id) {
+    try {
+      return await Employee.findById(id).select('-role');
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default EmployeeServices;
