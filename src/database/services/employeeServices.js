@@ -27,7 +27,7 @@ class EmployeeServices {
 
   static async getEmployee(id) {
     try {
-      return await Employee.findById(id).select('-_id fullName email phoneNumber jobTitle');
+      return await Employee.findById(id).select('-role');
     } catch (error) {
       throw error;
     }
