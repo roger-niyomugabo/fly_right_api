@@ -19,7 +19,7 @@ class EmployeeServices {
 
   static async deleteEmployee(employee) {
     try {
-      return await Employee.findByIdAndDelete(employee);
+      return await Employee.findOneAndDelete(employee);
     } catch (error) {
       throw error;
     }

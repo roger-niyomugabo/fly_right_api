@@ -46,13 +46,13 @@ class EmployeeController {
 
   static async deleteEmployee(req, res) {
     try {
-      const { id } = req.params.id;
-      const isdeleted = await EmployeeService.deleteEmployee(id);
-      if (!isdeleted) return output(res, 400, 'User does not exist');
-      return output(req, 200, 'Null');
+      const { id } = req.params;
+      await EmployeeService.deleteEmployee(id);
+      return output(res, 200, 'Employee deleted successfully');
     } catch (error) {
-      throw error;
+      return output(res, 500, error.message || error, null, 'SERVER_ERROR');
     }
   }
 }
+
 export default EmployeeController;

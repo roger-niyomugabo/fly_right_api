@@ -406,6 +406,36 @@
                     }
                 }
             }
+        },
+
+        "/api/employee/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "employee"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": "true",
+                        "description": "Id of an employee to delete",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "64350d4bc108e79aac3fcf54"
+                    }
+                ],
+                "summary": "Delete employee",
+                "description": "Admin can delete/remove an employee",
+                "responses": {
+                    "200" : {
+                        "description": "Employee deleted successfully"
+                    },
+                    "500" : {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                }
+            }
         }
     }
 }
