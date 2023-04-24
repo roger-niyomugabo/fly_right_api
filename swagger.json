@@ -276,7 +276,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Signup"
+                                "$ref": "#/components/schemas/AdminSignup"
                             }
                         }
                     }
