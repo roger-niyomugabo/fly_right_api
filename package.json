@@ -4,9 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "build": "npx babel ./src --out-dir ./dist",
-    "start": "npm run build && node ./dist/server.js",
-    "dev": "nodemon --exec babel-node ./src/server.js",
+    "build": "babel ./src --out-dir ./build",
+    "start": "node ./build/server.js",
+    "dev": "nodemon --exec npx babel-node src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
