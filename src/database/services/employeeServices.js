@@ -17,17 +17,9 @@ class EmployeeServices {
     }
   }
 
-  static async getEmployees() {
+  static async deleteEmployee(employee) {
     try {
-      return await Employee.find().select('_id fullName email phoneNumber jobTitle').sort({ createdAt: -1 });
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  static async getEmployee(id) {
-    try {
-      return await Employee.findById(id).select('-role');
+      return await Employee.findOneAndDelete(employee);
     } catch (error) {
       throw error;
     }

@@ -44,25 +44,15 @@ class EmployeeController {
     }
   }
 
-  static async getAllEmployees(req, res) {
+  static async deleteEmployee(req, res) {
     try {
-      const employees = await EmployeeService.getEmployees();
-      return output(res, 200, 'All employees retrieved!', employees);
-    } catch (error) {
-      return output(res, 500, error.message || error, null, 'SERVER_ERROR');
-    }
-  }
-
-  static async getSingleEmployee(req, res) {
-    try {
-      const { _id: id } = req.params;
-      const employee = await EmployeeService.getEmployee(id);
-      if (!employee) return output(res, 404, 'employee not found');
-      employee.password = undefined;
-      return output(res, 200, ' Employee retrieved!', employee, null, 'SERVER_ERROR');
+      const { id } = req.params;
+      await EmployeeService.deleteEmployee(id);
+      return output(res, 200, 'Employee deleted successfully');
     } catch (error) {
       return output(res, 500, error.message || error, null, 'SERVER_ERROR');
     }
   }
 }
+
 export default EmployeeController;

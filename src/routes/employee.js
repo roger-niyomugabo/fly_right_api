@@ -8,7 +8,6 @@ const router = Router();
 
 router.post('/signup', isAdmin, Validation.employeeSignupValidation, EmployeeController.employeeSignup);
 router.post('/login', loginValidation, EmployeeController.employeeLogin);
-router.get('/all', isAdmin, EmployeeController.getAllEmployees);
-router.get('/:_id', isAdmin, EmployeeController.getSingleEmployee);
+router.delete('/delete/:id', isAdmin, EmployeeController.deleteEmployee);
 
 export default router;
