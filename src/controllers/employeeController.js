@@ -56,11 +56,18 @@ class EmployeeController {
 
   static async getSingleEmployee(req, res) {
     try {
-      const { _id: id } = req.params;
-      const employee = await EmployeeService.getEmployee(id);
-      if (!employee) return output(res, 404, 'employee not found');
-      employee.password = undefined;
-      return output(res, 200, ' Employee retrieved!', employee, null, 'SERVER_ERROR');
+      const { _id } = req.params;
+      const employee = await EmployeeService.getEmployee({ _id });
+      return output(res, 200, 'Employee retrieved!', employee);
+    } catch (error) {
+      return output(res, 500, error.message || error, null, 'SERVER_ERROR');
+    }
+  }
+
+  static async getAllEmployees(req, res) {
+    try {
+      const employees = await EmployeeService.findEmployees();
+      return output(res, 200, 'Employees retrieved!', employees);
     } catch (error) {
       return output(res, 500, error.message || error, null, 'SERVER_ERROR');
     }
