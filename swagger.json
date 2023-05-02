@@ -11,7 +11,7 @@
             "description": "Local server"
         },
         {
-            "url": "https://flyrightapi.azurewebsites.net/",
+            "url": "https://smoggy-mite-onesies.cyclic.app/",
             "description": "Deployed server"
         }
     ],
@@ -412,6 +412,39 @@
             }
         },
 
+        "/api/employee/{_id}": {
+            "get": {
+                "tags": [
+                    "employee"
+                ],
+                "parameters": [
+                    {
+                        "name": "_id",
+                        "in": "path",
+                        "required": "true",
+                        "description": "Id of an employee to get a single employee",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "64350d4bc108e79aac3fcf54"
+                    }
+                ],
+                "summary": "Get single employee",
+                "description": "Admin can get a single employee",
+                "responses": {
+                    "200" : {
+                        "description": "Employee retrieved!"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/UnauthorizedError"
+                    },
+                    "500" : {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                }
+            }
+        },
+
         "/api/employee/delete/{id}": {
             "delete": {
                 "tags": [
@@ -434,6 +467,30 @@
                 "responses": {
                     "200" : {
                         "description": "Employee deleted successfully"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/UnauthorizedError"
+                    },
+                    "500" : {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                }
+            }
+        },
+
+        "/api/employee/all": {
+            "get": {
+                "tags": [
+                    "employee"
+                ],
+                "summary": "Get all employees",
+                "description": "Admin can get all employees",
+                "responses": {
+                    "200" : {
+                        "description": "Employees retrieved!"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/UnauthorizedError"
                     },
                     "500" : {
                         "$ref": "#/components/responses/ServerError"
