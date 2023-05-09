@@ -238,10 +238,29 @@
                     }
                 }
             },
+            "Category": {
+                "required": [
+                    "category_name",
+                    "description"
+                ],
+                "type": "object",
+                "properties": {
+                    "category_name": {
+                        "type": "string",
+                        "description": "Category name",
+                        "example": "Inflight"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "A parent category id",
+                        "example": "This category should include complaints from inside the plane"
+                    }
+                }
+            },
             "ComplaintCategory": {
                 "required": [
                     "category",
-                    "description"
+                    "parent_category"
                 ],
                 "type": "object",
                 "properties": {
@@ -250,10 +269,10 @@
                         "description": "compalint category name",
                         "example": "Food/Drinks"
                     },
-                    "description": {
+                    "parent_category": {
                         "type": "string",
-                        "description": "complaint description",
-                        "example": "This is a complaint regarding food and drinks inflight"
+                        "description": "A parent category id",
+                        "example": "645a70ffa24fddc7955c1c8f"
                     }
                 }
             },
@@ -305,6 +324,10 @@
         {
             "name": "employee",
             "description": "Employee Endpoints"
+        },
+        {
+            "name": "category",
+            "description": "Category Endpoints"
         },
         {
             "name": "complaint",
@@ -557,6 +580,46 @@
         },
 
         "/api/category/create": {
+            "post": {
+                "tags": [
+                    "category"
+                ],
+                "summary": "A complaint category",
+                "description": "",
+                "requestBody": {
+                    "required": "true",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Category"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201" : {
+                        "description": "Category created successfully"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/UnauthorizedError"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/Forbidden"
+                    },
+                    "409" : {
+                        "$ref": "#/components/responses/ConflictError"
+                    },
+                    "422" : {
+                        "$ref": "#/components/responses/ValidationError"
+                    },
+                    "500" : {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                }
+            }
+        },
+
+        "/api/complaintcategory/create": {
             "post": {
                 "tags": [
                     "complaint"
