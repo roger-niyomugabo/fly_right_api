@@ -237,6 +237,25 @@
                         "example": "Kigali, Gasabo"
                     }
                 }
+            },
+            "ComplaintCategory": {
+                "required": [
+                    "name",
+                    "description"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "compalint category name",
+                        "example": "Poor customer service"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "complaint description",
+                        "example": "This is a complaint regarding customer service inflight"
+                    }
+                }
             }
         }
     },
@@ -250,8 +269,8 @@
             "description": "Employee Endpoints"
         },
         {
-            "name": "claim",
-            "description": "claim Endpoints"
+            "name": "complaintCategory",
+            "description": "compalintCategory Endpoints"
         }
     ],
     "schemes": [
@@ -491,6 +510,46 @@
                     },
                     "401": {
                         "$ref": "#/components/responses/UnauthorizedError"
+                    },
+                    "500" : {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                }
+            }
+        },
+
+        "/api/category/create": {
+            "post": {
+                "tags": [
+                    "complaintCategory"
+                ],
+                "summary": "A complaint category",
+                "description": "",
+                "requestBody": {
+                    "required": "true",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ComplaintCategory"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201" : {
+                        "description": "Category created successfully"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/UnauthorizedError"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/Forbidden"
+                    },
+                    "409" : {
+                        "$ref": "#/components/responses/ConflictError"
+                    },
+                    "422" : {
+                        "$ref": "#/components/responses/ValidationError"
                     },
                     "500" : {
                         "$ref": "#/components/responses/ServerError"
