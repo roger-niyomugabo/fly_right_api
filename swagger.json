@@ -240,20 +240,58 @@
             },
             "ComplaintCategory": {
                 "required": [
-                    "name",
+                    "category",
                     "description"
                 ],
                 "type": "object",
                 "properties": {
-                    "name": {
+                    "category": {
                         "type": "string",
                         "description": "compalint category name",
-                        "example": "Poor customer service"
+                        "example": "Food/Drinks"
                     },
                     "description": {
                         "type": "string",
                         "description": "complaint description",
-                        "example": "This is a complaint regarding customer service inflight"
+                        "example": "This is a complaint regarding food and drinks inflight"
+                    }
+                }
+            },
+            "ComplaintDescription": {
+                "required": [
+                    "description",
+                    "category"
+                ],
+                "type": "object",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "complaint description",
+                        "example": "Unfulfilled special meal request"
+                    },
+                    "category": {
+                        "type": "string",
+                        "description": "complaint category id",
+                        "example": "645a5e144d0ae5c3ba3c63c6"
+                    }
+                }
+            },
+            "ComplaintPreferredSolution": {
+                "required": [
+                    "preferredSolution",
+                    "description"
+                ],
+                "type": "object",
+                "properties": {
+                    "preferredSolution": {
+                        "type": "string",
+                        "description": "preferred complaint solution",
+                        "example": "Provide an alternative meal that meets the specific dietary requirements"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "complaint description id",
+                        "example": "645a5fb69e873b782838935c"
                     }
                 }
             }
@@ -269,8 +307,8 @@
             "description": "Employee Endpoints"
         },
         {
-            "name": "complaintCategory",
-            "description": "compalintCategory Endpoints"
+            "name": "complaint",
+            "description": "compalint Endpoints"
         }
     ],
     "schemes": [
@@ -521,7 +559,7 @@
         "/api/category/create": {
             "post": {
                 "tags": [
-                    "complaintCategory"
+                    "complaint"
                 ],
                 "summary": "A complaint category",
                 "description": "",
@@ -538,6 +576,86 @@
                 "responses": {
                     "201" : {
                         "description": "Category created successfully"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/UnauthorizedError"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/Forbidden"
+                    },
+                    "409" : {
+                        "$ref": "#/components/responses/ConflictError"
+                    },
+                    "422" : {
+                        "$ref": "#/components/responses/ValidationError"
+                    },
+                    "500" : {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                }
+            }
+        },
+
+        "/api/description/create": {
+            "post": {
+                "tags": [
+                    "complaint"
+                ],
+                "summary": "A complaint description",
+                "description": "",
+                "requestBody": {
+                    "required": "true",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ComplaintDescription"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201" : {
+                        "description": "Complaint description added successfully"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/UnauthorizedError"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/Forbidden"
+                    },
+                    "409" : {
+                        "$ref": "#/components/responses/ConflictError"
+                    },
+                    "422" : {
+                        "$ref": "#/components/responses/ValidationError"
+                    },
+                    "500" : {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                }
+            }
+        },
+
+        "/api/solution/create": {
+            "post": {
+                "tags": [
+                    "complaint"
+                ],
+                "summary": "A preferred complaint solution",
+                "description": "",
+                "requestBody": {
+                    "required": "true",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ComplaintPreferredSolution"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201" : {
+                        "description": "Preferred solution added successfully"
                     },
                     "401": {
                         "$ref": "#/components/responses/UnauthorizedError"

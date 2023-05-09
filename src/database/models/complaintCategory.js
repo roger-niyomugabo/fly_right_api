@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const complaintCategory = new mongoose.Schema({
-  name: {
+  category: {
     type: String,
     unique: true
   },

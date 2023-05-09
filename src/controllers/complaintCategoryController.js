@@ -2,10 +2,10 @@ import ComplaintCategoryServices from '../database/services/complaintCategorySer
 import output from '../helpers/response';
 
 class ComplaintCategoryController {
-  static async createComplaintCategory(req, res) {
+  static async create(req, res) {
     try {
-      const { name } = req.body;
-      const complaintCategoryExists = await ComplaintCategoryServices.findCategory({ name });
+      const { category } = req.body;
+      const complaintCategoryExists = await ComplaintCategoryServices.findCategory({ category });
       if (complaintCategoryExists) return output(res, 409, 'Complaint category already exists', null, 'CONFLICT_ERROR');
       const complaintCategory = await ComplaintCategoryServices.createCategory({ ...req.body });
       return output(res, 201, 'Category created successfully', complaintCategory);
