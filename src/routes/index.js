@@ -5,6 +5,7 @@ import complaintCategoryRouter from './complaintCategory';
 import complaintDescriptionRouter from './description';
 import preferredSolutionRouter from './preferredSolution';
 import categoryRouter from './category';
+import flightComplaint from './flightComplaint';
 
 const router = Router();
 
@@ -14,5 +15,6 @@ router.use('/complaintcategory', complaintCategoryRouter);
 router.use('/description', complaintDescriptionRouter);
 router.use('/solution', preferredSolutionRouter);
 router.use('/category', categoryRouter);
+router.use('/complaint', flightComplaint);
 
 export default router;
