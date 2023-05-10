@@ -5,8 +5,8 @@ const complaintCategory = new mongoose.Schema({
     type: String,
     unique: true
   },
-  description: {
-    type: String
+  parent_category: {
+    type: mongoose.Schema.Types.ObjectId, ref: 'Category'
   }
 });
 
