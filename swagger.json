@@ -774,13 +774,57 @@
             }
         },
 
+        "/api/complaint/": {
+            "post": {
+                "tags": [
+                    "complaint"
+                ],
+                "summary": "Flight ticket number",
+                "description": "Passenger enters a valid ticket number to be able to file a complaint",
+                "requestBody": {
+                    "required": "true",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "ticketNumber"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "ticketNumber": {
+                                        "type": "string",
+                                        "description": "flight ticket number",
+                                        "example": "DEF123456789-X"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200" : {
+                        "description": "Proceed with filing complaint!"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "422" : {
+                        "$ref": "#/components/responses/ValidationError"
+                    },
+                    "500" : {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                }
+            }
+        },
+
         "/api/complaint/create": {
             "post": {
                 "tags": [
                     "complaint"
                 ],
                 "summary": "Inflight or Outflight complaint",
-                "description": "This route is for filing inflight and outflight complaints",
+                "description": "Passenger can file an inflight/outflight complaint. Only done when you have first provided a valid ticket number",
                 "requestBody": {
                     "required": "true",
                     "content": {
@@ -797,6 +841,12 @@
                     },
                     "400": {
                         "$ref": "#/components/responses/BadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/UnauthorizedError"
+                    },
+                    "403": {
+                        "$ref":"#/components/responses/Forbidden"
                     },
                     "409" : {
                         "$ref": "#/components/responses/ConflictError"

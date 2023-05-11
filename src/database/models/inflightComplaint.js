@@ -20,6 +20,14 @@ const inflightComplaintSchema = new mongoose.Schema({
   comment: {
     type: String,
     unique: true
+  },
+  passenger: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Ticket',
+  },
+  status: {
+    type: String,
+    default: 'pending'
   }
 });
 

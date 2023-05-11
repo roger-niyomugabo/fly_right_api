@@ -15,3 +15,17 @@ export const isAdmin = async (req, res, next) => {
     return output(res, 401, error.message || error, null, 'AUTHENTICATION_ERROR');
   }
 };
+
+export const isPassenger = async (req, res, next) => {
+  try {
+    if (!req.header('Authorization')) throw new Error('Invalid access token');
+    const token = req.header('Authorization').replace('Bearer ', '');
+    const passenger = verify(token);
+    if (passenger.role !== 'passenger') return output(res, 403, 'You don\'t have access to do that action', null, 'FORBIDDEN');
+    req.passenger = passenger;
+    req.token = token;
+    return next();
+  } catch (error) {
+    return output(res, 401, error.message || error, null, 'AUTHENTICATION_ERROR');
+  }
+};
