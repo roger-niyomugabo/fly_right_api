@@ -16,6 +16,14 @@ class ComplaintDescriptionServices {
       throw error;
     }
   }
+
+  static async findAllDescriptions(descriptions) {
+    try {
+      return await ComplaintDescription.find(descriptions);
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default ComplaintDescriptionServices;
