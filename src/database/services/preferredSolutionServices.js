@@ -16,6 +16,14 @@ class PreferredSolutionServices {
       throw error;
     }
   }
+
+  static async findSolutions(solution) {
+    try {
+      return await ComplaintPreferredSolution.find(solution);
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default PreferredSolutionServices;
