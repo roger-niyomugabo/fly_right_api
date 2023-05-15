@@ -6,5 +6,6 @@ import { isAdmin } from '../middlewares/authorization';
 const router = Router();
 
 router.post('/create', isAdmin, Validation.complaintCategoryValidation, ComplaintCategoryController.create);
+router.get('/all', ComplaintCategoryController.allCategories);
 
 export default router;

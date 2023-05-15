@@ -13,6 +13,15 @@ class ComplaintCategoryController {
       return output(res, 500, error.message || error, null, 'SERVER_ERROR');
     }
   }
+
+  static async allCategories(req, res) {
+    try {
+      const complaintCategories = await ComplaintCategoryServices.findCategories();
+      return output(res, 200, 'Complaint categories retrieved successfully', complaintCategories);
+    } catch (error) {
+      return output(res, 500, error.message || error, null, 'SERVER_ERROR');
+    }
+  }
 }
 
 export default ComplaintCategoryController;
