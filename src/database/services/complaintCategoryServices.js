@@ -16,6 +16,14 @@ class ComplaintCategoryServices {
       throw error;
     }
   }
+
+  static async findCategories() {
+    try {
+      return await ComplaintCategory.find();
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default ComplaintCategoryServices;

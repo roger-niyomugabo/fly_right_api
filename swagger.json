@@ -859,6 +859,24 @@
                     }
                 }
             }
+        },
+
+        "/api/complaintcategory/all": {
+            "get": {
+                "tags": [
+                    "complaint"
+                ],
+                "summary": "Get all complaint categories",
+                "description": "",
+                "responses": {
+                    "200" : {
+                        "description": "Complaint categories retrieved successfully"
+                    },
+                    "500" : {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                }
+            }
         }
     }
 }
