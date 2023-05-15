@@ -861,28 +861,28 @@
             }
         },
 
-        "/api/complaintcategory/{_id}/descriptions": {
+        "/api/description/{_id}/preferredsolutions": {
             "get": {
                 "tags": [
                     "complaint"
                 ],
                 "parameters": [
-                    {
+                        {
                         "name": "_id",
                         "in": "path",
                         "required": "true",
-                        "description": "Complaint category id",
+                        "description": "Description id",
                         "schema": {
                             "type": "string"
                         },
-                        "example": "645a5e144d0ae5c3ba3c63c6"
+                        "example": "645a5fb69e873b782838935c"
                     }
                 ],
-                "summary": "Get all descriptions af a complaint category",
-                "description": "Get all descriptions af a certain complaint category",
+                "summary": "Get all preferred solutions",
+                "description": "Get all preferred solutions based on the selected complaint description",
                 "responses": {
                     "200" : {
-                        "description": "Complaint descriptions retrieved successfully"
+                        "description": "Complaint preferred slutions retrieved successfully"
                     },
                     "500" : {
                         "$ref": "#/components/responses/ServerError"
