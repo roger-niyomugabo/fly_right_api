@@ -861,6 +861,25 @@
             }
         },
 
+        "/api/complaintcategory/all": {
+            "get": {
+                "tags": [
+                    "complaint"
+                ],
+                "summary": "Get all complaint categories",
+                "description": "",
+                "responses": {
+                    "200" : {
+                        "description": "Complaint categories retrieved successfully"
+                    },
+                    "500" : {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                }
+            }
+        },
+
+        
         "/api/complaintcategory/{_id}/descriptions": {
             "get": {
                 "tags": [
@@ -883,6 +902,36 @@
                 "responses": {
                     "200" : {
                         "description": "Complaint descriptions retrieved successfully"
+                    },
+                    "500" : {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                }
+            }
+        },
+
+        "/api/description/{_id}/preferredsolutions": {
+            "get": {
+                "tags": [
+                    "complaint"
+                ],
+                "parameters": [
+                        {
+                        "name": "_id",
+                        "in": "path",
+                        "required": "true",
+                        "description": "Description id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "645a5fb69e873b782838935c"
+                    }
+                ],
+                "summary": "Get all preferred solutions",
+                "description": "Get all preferred solutions based on the selected complaint description",
+                "responses": {
+                    "200" : {
+                        "description": "Complaint preferred slutions retrieved successfully"
                     },
                     "500" : {
                         "$ref": "#/components/responses/ServerError"

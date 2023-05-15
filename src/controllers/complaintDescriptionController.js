@@ -1,6 +1,7 @@
 import ComplaintDescriptionServices from '../database/services/complaintDescriptionServices';
 import output from '../helpers/response';
 import ComplaintCategoryServices from '../database/services/complaintCategoryServices';
+import PreferredSolutionServices from '../database/services/preferredSolutionServices';
 
 class ComplaintDescriptionController {
   static async create(req, res) {
@@ -21,6 +22,17 @@ class ComplaintDescriptionController {
       const category = await ComplaintCategoryServices.findCategory({ _id });
       const descriptions = await ComplaintDescriptionServices.findAllDescriptions({ category: category._id });
       return output(res, 200, 'Complaint descriptions retrieved successfully', descriptions);
+    } catch (error) {
+      return output(res, 500, error.message || error, null, 'SERVER_ERROR');
+    }
+  }
+
+  static async allPreferredSolutions(req, res) {
+    try {
+      const { _id } = req.params;
+      const description = await ComplaintDescriptionServices.findDescription({ _id });
+      const preferredSolutions = await PreferredSolutionServices.findSolutions({ description: description._id });
+      return output(res, 200, 'Complaint preferred slutions retrieved successfully', preferredSolutions);
     } catch (error) {
       return output(res, 500, error.message || error, null, 'SERVER_ERROR');
     }
